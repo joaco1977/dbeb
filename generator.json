@@ -1,0 +1,182 @@
+{
+	"baseName": "dbeb",
+	"packageName": "com.asimplemodule.dbeb",
+	"entities": [
+		{
+			"name": "user",
+			"attrs": [
+				{
+					"attrName": "facebookId",
+					"attrType": "String",
+					"minLength": "4",
+					"maxLength": "65",
+					"enumValues": [],
+					"required": false
+				},
+				{
+					"attrName": "password",
+					"attrType": "String",
+					"minLength": "6",
+					"maxLength": "12",
+					"enumValues": [],
+					"required": false
+				}
+			]
+		},
+		{
+			"name": "recommendation",
+			"attrs": [
+				{
+					"attrName": "name",
+					"attrType": "String",
+					"minLength": "4",
+					"maxLength": "65",
+					"enumValues": [],
+					"required": true
+				},
+				{
+					"attrName": "info",
+					"attrType": "String",
+					"minLength": "4",
+					"maxLength": "65",
+					"enumValues": [],
+					"required": false
+				},
+				{
+					"attrName": "active",
+					"attrType": "Boolean",
+					"enumValues": [],
+					"required": false
+				},
+				{
+					"attrName": "companyId",
+					"attrType": "Long",
+					"min": "",
+					"max": "",
+					"enumValues": [],
+					"required": true
+				},
+				{
+					"attrName": "detail",
+					"attrType": "String",
+					"minLength": "10",
+					"maxLength": "1000",
+					"enumValues": [],
+					"required": true
+				},
+				{
+					"attrName": "votes",
+					"attrType": "Integer",
+					"min": "0",
+					"max": "5",
+					"enumValues": [],
+					"required": true
+				},
+				{
+					"attrName": "recodate",
+					"attrType": "Date",
+					"dateConstraint": "Past",
+					"enumValues": [],
+					"required": true
+				},
+				{
+					"attrName": "createUserEmail",
+					"attrType": "String",
+					"minLength": "5",
+					"maxLength": "65",
+					"enumValues": [],
+					"required": true
+				}
+			]
+		},
+		{
+			"name": "company",
+			"attrs": [
+				{
+					"attrName": "name",
+					"attrType": "String",
+					"minLength": "4",
+					"maxLength": "65",
+					"enumValues": [],
+					"required": true
+				},
+				{
+					"attrName": "info",
+					"attrType": "String",
+					"minLength": "4",
+					"maxLength": "65",
+					"enumValues": [],
+					"required": false
+				},
+				{
+					"attrName": "active",
+					"attrType": "Boolean",
+					"enumValues": [],
+					"required": true
+				},
+				{
+					"attrName": "locationId",
+					"attrType": "Long",
+					"min": "",
+					"max": "",
+					"enumValues": [],
+					"required": true
+				},
+				{
+					"attrName": "facebook",
+					"attrType": "String",
+					"minLength": "4",
+					"maxLength": "65",
+					"enumValues": [],
+					"required": false
+				},
+				{
+					"attrName": "email",
+					"attrType": "String",
+					"minLength": "4",
+					"maxLength": "65",
+					"enumValues": [],
+					"required": false
+				},
+				{
+					"attrName": "webSite",
+					"attrType": "String",
+					"minLength": "10",
+					"maxLength": "",
+					"enumValues": [],
+					"required": false
+				}
+			]
+		},
+		{
+			"name": "location",
+			"attrs": [
+				{
+					"attrName": "formattedAddress",
+					"attrType": "String",
+					"minLength": "4",
+					"maxLength": "",
+					"enumValues": [],
+					"required": false
+				},
+				{
+					"attrName": "longitud",
+					"attrType": "Double",
+					"min": "",
+					"max": "",
+					"enumValues": [],
+					"required": false
+				},
+				{
+					"attrName": "latitud",
+					"attrType": "Double",
+					"min": "",
+					"max": "",
+					"enumValues": [],
+					"required": false
+				}
+			]
+		}
+	],
+	"resources": []
+}
