@@ -1,6 +1,6 @@
   // Declare app level module which depends on filters, and services
 angular.module('dbeb', ['ngResource','ngRoute', 'ui.bootstrap', 
-                        'ui.date','ngCookies','ngHello'])
+                        'ui.date','ngCookies','ngHello','ngAutocomplete'])
  	.config(['$routeProvider','$locationProvider','$httpProvider','helloProvider',
  	         function ($routeProvider,$locationProvider,$httpProvider,helloProvider) {
   	
@@ -11,16 +11,15 @@ angular.module('dbeb', ['ngResource','ngRoute', 'ui.bootstrap',
 	  $routeProvider
       .when('/', {
         templateUrl: 'views/home/home.html', 
-        controller: 'HomeController'})
+        controller: 'HomeController',
+        authenticate: false})
       .otherwise({redirectTo: '/'});
 	  
 	  
 	  
 }])
-.run(function ($rootScope,$location,$cookieStore,Auth,hello,User) {
+.run(function ($rootScope,$location,$cookieStore,Auth,hello) {
       
-      
-      var isLoggedIn = $rootScope.currentUser;
 
       hello.on("auth.login", function (auth) {
           
@@ -32,18 +31,19 @@ angular.module('dbeb', ['ngResource','ngRoute', 'ui.bootstrap',
       hello.on("auth.logout", function (auth) {
            Auth.registerLogout(auth.network);
            $cookieStore.remove('token');
-           $location.path('/#/recommendations');
+           $location.path('/#/');
       });
       
 
       $rootScope.$on('$routeChangeStart', function (event, next) {
     	  event.preventDefault();
 
-    	  if (next.authenticate && isLoggedIn) {
+    	  if (next.authenticate && !$cookieStore.get('token')) {
               event.preventDefault();
-              $location.path('/');
+              $location.path('/#/');
               console.log('require auth '+next);
     	  }
+        
     	  
       });
 });      

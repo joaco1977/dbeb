@@ -1,3 +1,11 @@
 angular.module('dbeb')
-  .controller('HomeController', ['$scope', function ($scope) {
+  .controller('HomeController', ['$scope','Auth', 
+
+  	function ($scope,Auth) {
+
+  	$scope.isLoggedIn = function(socialNet) {
+  		return Auth.isLoggedIn(socialNet);
+  	}
+
+
   }]);

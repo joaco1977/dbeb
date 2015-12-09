@@ -10,88 +10,65 @@
             <div class="modal-header">
                 <button type="button" class="close"
                         ng-click="cancel()">&times;</button>
-                <h4 class="modal-title" id="myRecommendationLabel">Create or edit a Recommendation</h4>
+                <h4 class="modal-title" id="myRecommendationLabel">Datos de la Recommendación</h4>
             </div>
             <div class="modal-body">
+                
+
+                
                 <div class="form-group">
-                    <label>ID</label>
-                    <input type="text" class="form-control" name="id"
-                           ng-model="recommendation.id" readonly>
+                    <label>Título:</label>
+                    
+                    <input type="text" class="form-control" name="name"
+                           ng-model="recommendation.name" ng-required="true"
+                           ng-minlength="4" ng-maxlength="65"/>
+                    <span class="error" ng-show="form.name.$error.minlength">Must be at least 4
+                     characters.</span>
+                    <span class="error" ng-show="form.name.$error.maxlength">Must be at most 65 characters.</span>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label>Nombre de la Empresa o Persona:</label>
+                    
+                    <input type="text" class="form-control" name="companyName"
+                           ng-model="companyName" ng-required="true"/>
+                    
+                </div>
+
+                <div class="form-group move-down">
+                        <label for="Autocomplete">Ubicación:</label>
+                            <input class="form-control" type="text" id="Autocomplete" ng-autocomplete 
+                            ng-model="result" details="details" options="options" />
                 </div>
 
                 
                 <div class="form-group">
-                    <label>name:</label>
+                    <label>Detallanos lo que hicieron:</label>
                     
-                    <input type="text" class="form-control" name="name"
-                           ng-model="recommendation.name" ng-required="true"
-                           ng-minlength=4 ng-maxlength=65/>
-                    <span class="error" ng-show="form.name.$error.minlength">Must be at least 4 characters.</span>
-                    <span class="error" ng-show="form.name.$error.maxlength">Must be at most 65 characters.</span>
-                </div>
-                
-                <div class="form-group">
-                    <label>info:</label>
-                    
-                    <input type="text" class="form-control" name="info"
-                           ng-model="recommendation.info" ng-required="false"
-                           ng-minlength=4 ng-maxlength=65/>
-                    <span class="error" ng-show="form.info.$error.minlength">Must be at least 4 characters.</span>
-                    <span class="error" ng-show="form.info.$error.maxlength">Must be at most 65 characters.</span>
-                </div>
-                
-                <div class="form-group">
-                    <label>active:</label>
-                    
-                    <input type="checkbox" name="active"
-                           ng-model="recommendation.active" ng-required="false"/>
-                </div>
-                
-                <div class="form-group">
-                    <label>companyId:</label>
-                    
-                    <input type="number" class="form-control" name="companyId"
-                           ng-model="recommendation.companyId" ng-required="true"
-                           />
-                    <span class="error" ng-show="form.companyId.$error.min">Must be greater than or equal to .</span>
-                    <span class="error" ng-show="form.companyId.$error.max">Must be less than or equal to .</span>
-                </div>
-                
-                <div class="form-group">
-                    <label>detail:</label>
-                    
-                    <input type="text" class="form-control" name="detail"
+                    <textarea type="text" rows="6" class="form-control" name="detail"
                            ng-model="recommendation.detail" ng-required="true"
-                           ng-minlength=10 ng-maxlength=1000/>
-                    <span class="error" ng-show="form.detail.$error.minlength">Must be at least 10 characters.</span>
+                           ng-minlength="10" ng-maxlength="1000"/>
+                    <span class="error" ng-show="form.detail.$error.minlength">Debe contener por lo menos 10 caracteres.</span>
                     <span class="error" ng-show="form.detail.$error.maxlength">Must be at most 1000 characters.</span>
                 </div>
                 
                 <div class="form-group">
-                    <label>votes:</label>
+                    <label class="votes-info">Que puntaje le darías?</label>
                     
-                    <input type="number" class="form-control" name="votes"
-                           ng-model="recommendation.votes" ng-required="true"
-                           min=0 max=5/>
-                    <span class="error" ng-show="form.votes.$error.min">Must be greater than or equal to 0.</span>
-                    <span class="error" ng-show="form.votes.$error.max">Must be less than or equal to 5.</span>
+                    <rating ng-model="recommendation.votes" max="max" readonly="isReadonly" 
+                                on-hover="hoveringOver(value)" on-leave="overStar = null" 
+                                titles="['one','two','three']" aria-labelledby="default-rating">
+                            </rating>
+                            <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+
                 </div>
                 
                 <div class="form-group">
-                    <label>recodate:</label>
+                    <label>Fecha en que se realizó el servicio:</label>
                     
                     <input type="text" class="form-control" name="recodate" ui-date="recodateDateOptions" ui-date-format="yy-mm-dd" 
                            ng-model="recommendation.recodate" ng-required="true"/>
-                </div>
-                
-                <div class="form-group">
-                    <label>createUserEmail:</label>
-                    
-                    <input type="text" class="form-control" name="createUserEmail"
-                           ng-model="recommendation.createUserEmail" ng-required="true"
-                           ng-minlength=5 ng-maxlength=65/>
-                    <span class="error" ng-show="form.createUserEmail.$error.minlength">Must be at least 5 characters.</span>
-                    <span class="error" ng-show="form.createUserEmail.$error.maxlength">Must be at most 65 characters.</span>
                 </div>
                 
 

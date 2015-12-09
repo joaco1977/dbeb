@@ -12,10 +12,9 @@ angular.module('dbeb')
     }
 
 
+    
     $scope.isLoggedIn = function(socialNet) {
-    	
-    	return Auth.isLoggedIn(socialNet);
-
+        return Auth.isLoggedIn(socialNet);
     }
 
     $scope.getCurrentUser = function() {

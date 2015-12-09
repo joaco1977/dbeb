@@ -31,6 +31,10 @@ angular.module('dbeb')
        * @return {Boolean}
        */
       isLoggedIn: function(socialNet) {
+        //if($cookieStore.get('token')) {
+         // return true;
+        //}
+
         var session = hello.getAuthResponse(socialNet);
 
         var currentTime = (new Date()).getTime() / 1000;
@@ -55,9 +59,8 @@ angular.module('dbeb')
           });
       },
 
-      registerLogout : function() {
-        $rootScope.currentUser = {};
-
+      registerLogout : function(socialNet) {
+        $rootScope.currentUser = null;
       },
 
       getUserFromSocial : function(socialNet) {

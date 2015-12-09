@@ -5,6 +5,10 @@ angular.module('dbeb')
    'Recommendation','Auth',
     function ($scope, $modal, resolvedRecommendation, Recommendation,Auth) {
 
+      $scope.result = '';
+      $scope.details = '';
+      $scope.options = null;
+
       $scope.recommendations = resolvedRecommendation;
 
       $scope.create = function () {
@@ -63,14 +67,15 @@ angular.module('dbeb')
         };
       };
 
-      $scope.isLoggedIn = function(socialNet) {
+       $scope.isLoggedIn = function(socialNet) {
         return Auth.isLoggedIn(socialNet);
-      }
+       }
 
       $scope.open = function (id) {
         var recommendationSave = $modal.open({
           templateUrl: 'recommendation-save.html',
           controller: 'RecommendationSaveController',
+          size: 'lg',
           resolve: {
             recommendation: function () {
               return $scope.recommendation;
@@ -88,6 +93,21 @@ angular.module('dbeb')
     function ($scope, $modalInstance, recommendation) {
       $scope.recommendation = recommendation;
 
+      
+      $scope.result = '';
+      $scope.details = '';
+      $scope.options = null;
+
+      $scope.votes = 0;
+      $scope.max = 5;
+      $scope.isReadonly = false;
+      $scope.companyName = {};
+      $scope.companyLocaltion = {};
+
+      $scope.hoveringOver = function(value) {
+        $scope.overStar = value;
+        $scope.percent = 100 * (value / $scope.max);
+      };
       
       $scope.recodateDateOptions = {
         dateFormat: 'yy-mm-dd',

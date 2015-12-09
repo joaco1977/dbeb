@@ -37,9 +37,15 @@ body {
 }
 
 
+
+/********recommnedation detail********************/
 .user-info {
   display: inline-block;
   padding-right: 10px;
   font-weight: bold;
   color: #546053;
+}
+
+.votes-info {
+  padding-right: 20px;
 }
