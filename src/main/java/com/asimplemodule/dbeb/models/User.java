@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -17,7 +16,7 @@ public class User {
 
     
     @Column(name = "facebookId", length = 65,unique=true)
-    @Size(min = 4, max = 65)
+    
     
     
     
@@ -25,7 +24,7 @@ public class User {
     private String facebookId;
     
     @Column(name = "password", length = 12)
-    @Size(min = 6, max = 12)
+    
     
     
     
@@ -35,15 +34,19 @@ public class User {
     
     
     @Column(name = "firstName", length = 65)
-    @Size(min = 6, max = 65)
+    
 
     private String firstName;
     
     
     
     @Column(name = "lastName", length = 65)
-    @Size(min = 6, max = 65)
+    
     private String lastName;
+    
+    @Column(name = "picture")
+    private String picture;
+    
     
     
     public long getId() {
@@ -89,6 +92,15 @@ public class User {
     public String getFullName() {
     	return this.firstName+" "+this.lastName;
     }
+    
+    public String getPicture() {
+    	return picture;
+    }
+    
+    public void setPicture(String picture) {
+    	this.picture = picture;
+    }
+    
 
     @Override
     public boolean equals(Object o) {

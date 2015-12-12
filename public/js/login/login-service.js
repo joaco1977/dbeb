@@ -46,10 +46,11 @@ angular.module('dbeb')
 
         hello(socialNet).api('/me').then(function(r) {
             
-           var query = User.query({email: r.email})
+           var query = User.query({facebookId: r.email})
            query.$promise.then(function(data) {
               if(data.length == 0)  {
-                  $rootScope.currentUser = User.save({facebookId: r.email});
+                  var user = new User ({facebookId: r.email,firstName: r.first_name, lastName: r.last_name, picture: r.picture});
+                  $rootScope.currentUser = user.$save();
               } else {
                 $rootScope.currentUser = data[0];
               }
@@ -66,7 +67,7 @@ angular.module('dbeb')
       getUserFromSocial : function(socialNet) {
         hello(socialNet).api('/me').then(function(r) {
             
-           var query = User.query({email: r.email})
+           var query = User.query({facebookId: r.email})
            query.$promise.then(function(data) {
                return data;
            });
