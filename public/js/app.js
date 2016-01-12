@@ -1,6 +1,6 @@
   // Declare app level module which depends on filters, and services
 angular.module('dbeb', ['ngResource','ngRoute', 'ui.bootstrap', 
-                        'ui.date','ngCookies','ngHello','ngAutocomplete'])
+                        'ui.date','ngCookies','ngHello','ngAutocomplete','ngTagsInput'])
  	.config(['$routeProvider','$locationProvider','$httpProvider','helloProvider',
  	         function ($routeProvider,$locationProvider,$httpProvider,helloProvider) {
   	
@@ -10,10 +10,10 @@ angular.module('dbeb', ['ngResource','ngRoute', 'ui.bootstrap',
  		
 	  $routeProvider
       .when('/', {
-        templateUrl: 'views/home/home.html', 
-        controller: 'HomeController',
+        templateUrl: 'views/recommendation/recommendations.html', 
+        controller: 'RecommendationController',
         authenticate: false})
-      .otherwise({redirectTo: '/'});
+      .otherwise({redirectTo: '/recommendations'});
 	  
 	  
 	  

@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,25 +16,19 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 @Entity
-@Table(name = "locations")
-public class Location {
+@Table(name = "tags")
+public class Tag {
 
     @Id
     @GeneratedValue
     private long id;
 
     
-    @Column(name = "formattedAddress")
-    @Size(min = 4)
-    private String formattedAddress;
+    @Column(name = "name")
+    private String name;
     
-    @Column(name = "longitud")
-    private Double longitude;
     
-    @Column(name = "latitud")
-    private Double latitude;
-    
-
+   
     
    
 }

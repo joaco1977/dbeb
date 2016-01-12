@@ -1,9 +1,34 @@
 package com.asimplemodule.dbeb.models;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
-import org.joda.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
+import org.hibernate.criterion.Restrictions;
+
+import com.asimplemodule.dbeb.util.HibernateUtil;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
 @Entity
 @Table(name = "recommendations")
 public class Recommendation {
@@ -15,149 +40,50 @@ public class Recommendation {
     
     @Column(name = "name", length = 65)
     @Size(min = 4, max = 65)
-    
-    
-    
-    
     private String name;
     
     @Column(name = "info", length = 65)
-    @Size(min = 4, max = 65)
-    
-    
-    
-    
     private String info;
     
     @Column(name = "active")
-    
-    
-    
-    
-    
     private Boolean active;
     
-    @Column(name = "companyId")
-    
-    
-    
-    
-    
-    private Long companyId;
     
     @Column(name = "detail", length = 1000)
     @Size(min = 10, max = 1000)
-    
-    
-    
-    
     private String detail;
     
     @Column(name = "votes")
-    
     @Min(value = 0)
     @Max(value = 5)
-    
-    
     private Integer votes;
     
     @Column(name = "recodate")
-    
-    
-    
     @Past
-    
-    private LocalDate recodate;
+    private Date recodate;
     
     @Column(name = "createUserEmail", length = 65)
-    @Size(min = 5, max = 65)
-    
-    
-    
-    
     private String createUserEmail;
     
-
-    public long getId() {
-        return id;
-    }
-
     
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
-    
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-    
-    public Long getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
-    }
-    
-    public String getDetail() {
-        return detail;
-    }
-
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
-    
-    public Integer getVotes() {
-        return votes;
-    }
-
-    public void setVotes(Integer votes) {
-        this.votes = votes;
-    }
-    
-    public LocalDate getRecodate() {
-        return recodate;
-    }
-
-    public void setRecodate(LocalDate recodate) {
-        this.recodate = recodate;
-    }
-    
-    public String getCreateUserEmail() {
-        return createUserEmail;
-    }
-
-    public void setCreateUserEmail(String createUserEmail) {
-        this.createUserEmail = createUserEmail;
-    }
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="companyId")
+    private Company company;
     
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Recommendation)) return false;
-        Recommendation that = (Recommendation) o;
-        return id == that.id;
+    
+    public void addRecoTag(Tag tag) {
+    	HibernateUtil.getSession().saveOrUpdate(tag);
+    	HibernateUtil.getSession().saveOrUpdate(new RecoTag(this.getId(),tag.getId()));
     }
-
-    @Override
-    public int hashCode() {
-        return (int) (id ^ (id >>> 32));
+    
+    public void removeRecoTag(Tag tag) {
+    	HibernateUtil.getSession().delete(new RecoTag(this.getId(),tag.getId()));
+    }
+    
+    public List<Tag> getTags() {
+    	return HibernateUtil.getSession().createCriteria(RecoTag.class).add(
+    			Restrictions.eq("recommendationId",this.getId())).list();
+    	
     }
 }

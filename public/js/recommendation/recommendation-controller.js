@@ -6,8 +6,8 @@ angular.module('dbeb')
     function ($scope, $modal, resolvedRecommendation, Recommendation,Auth) {
 
       $scope.result = '';
-      $scope.details = '';
-      $scope.options = null;
+      //$scope.details = '';
+      $scope.options = {};
 
       $scope.recommendations = resolvedRecommendation;
 
@@ -36,6 +36,14 @@ angular.module('dbeb')
               $scope.clear();
             });
         } else {
+        	
+          $scope.recommendation.company.location.latitude =
+        	  $scope.recommendation.company.location.details.geometry.location.lat();
+          $scope.recommendation.company.location.longitude =
+        	  $scope.recommendation.company.location.details.geometry.location.lng();
+          
+          delete $scope.recommendation.company.location.details;
+          
           Recommendation.save($scope.recommendation,
             function () {
               $scope.recommendations = Recommendation.query();
@@ -94,15 +102,18 @@ angular.module('dbeb')
       $scope.recommendation = recommendation;
 
       
-      $scope.result = '';
-      $scope.details = '';
-      $scope.options = null;
+      $scope.result = "";
+      //$scope.details = '';
+      $scope.options = {};
+      $scope.recommendation.company = {};
+      $scope.recommendation.company.location = {};
+      $scope.recommendation.company.location.details = {};
+      $scope.recommendation.company.location.formattedAddress = '';
 
       $scope.votes = 0;
       $scope.max = 5;
       $scope.isReadonly = false;
-      $scope.companyName = {};
-      $scope.companyLocaltion = {};
+      
 
       $scope.hoveringOver = function(value) {
         $scope.overStar = value;

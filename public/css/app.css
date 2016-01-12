@@ -1,6 +1,5 @@
 body {
   margin-top: 60px;
-  padding: 10px;
   background-color: #ECF0F1;
 
 }
@@ -49,3 +48,73 @@ body {
 .votes-info {
   padding-right: 20px;
 }
+
+
+/**********autocomplete*/
+
+.pac-container {
+    background-color: #FFF;
+    z-index: 1051 !important;
+    position: fixed;
+    display: inline-block;
+    float: left;
+}
+
+
+/*****************filter*****/
+.search {
+    margin: 0 auto;
+    background-color: #ECF0F1;
+    margin-bottom: 50px;
+    margin-top: 30px;
+    
+    .input-search {
+    	padding-left: 30px;
+    }
+}
+
+.results {
+	background-color: #ffffff;
+	margin-left:50px;
+	margin-right:50px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	border: 1px solid #dddddd;
+}
+
+.input-container {
+	margin: 0 auto;
+	width: 40%;
+	
+}
+
+.input-container .form-control {
+	height:50px;
+}
+
+
+.no-data {
+	margin: 0 auto;
+	width: 50%;
+	margin-top: 4em;
+}
+
+.message-init span{
+	font-size: 2em;
+	font-weight: bold;
+	color: #546053;
+}
+
+.button-container {
+	height: 50px;
+	margin-right: 10px;
+}
+
+.create-button {
+    padding: 1em;
+    display: inherit;
+    width: 28%;
+    
+}	

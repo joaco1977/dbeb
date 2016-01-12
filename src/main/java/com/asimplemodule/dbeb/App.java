@@ -1,20 +1,29 @@
 package com.asimplemodule.dbeb;
 
-import static spark.Spark.*;
-import com.asimplemodule.dbeb.models.*;
-import com.asimplemodule.dbeb.util.*;
+import static spark.Spark.after;
+import static spark.Spark.before;
+import static spark.Spark.delete;
+import static spark.Spark.exception;
+import static spark.Spark.get;
+import static spark.Spark.halt;
+import static spark.Spark.post;
+import static spark.Spark.put;
+import static spark.SparkBase.externalStaticFileLocation;
+import static spark.SparkBase.setPort;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
-import org.hibernate.Session;
 
-import spark.Filter;
-import spark.Request;
-import spark.Response;
-import spark.Route;
+import com.asimplemodule.dbeb.models.Company;
+import com.asimplemodule.dbeb.models.Location;
+import com.asimplemodule.dbeb.models.Recommendation;
+import com.asimplemodule.dbeb.models.User;
+import com.asimplemodule.dbeb.util.HibernateUtil;
+import com.asimplemodule.dbeb.util.JacksonUtil;
+import com.asimplemodule.dbeb.util.JsonTransformer;
 
 public class App {
 
+	
     public static void main(final String[] args) {
         setPort(8080);
         externalStaticFileLocation("public"); // Static files
@@ -75,10 +84,12 @@ public class App {
         }, new JsonTransformer());
 
         post("dbeb/recommendations", "application/json", (request, response) -> {
-            Recommendation obj = JacksonUtil.readValue(request.body(), Recommendation.class);
-            HibernateUtil.getSession().saveOrUpdate(obj);
+            Recommendation reco = JacksonUtil.readValue(request.body(), Recommendation.class);
+            
+            HibernateUtil.getSession().save(reco);
+            
             response.status(201);
-            return obj;
+            return reco;
         }, new JsonTransformer());
 
         put("dbeb/recommendations/:id", "application/json", (request, response) -> {
@@ -99,80 +110,7 @@ public class App {
             return "";
         });
         
-        get("dbeb/companies", "application/json", (request, response) -> {
-            List<Company> objs = HibernateUtil.getSession().createCriteria(Company.class).list();
-            return objs;
-        }, new JsonTransformer());
 
-        get("dbeb/companies/:id", "application/json", (request, response) -> {
-            long id = Long.parseLong(request.params(":id"));
-            Company obj = (Company)HibernateUtil.getSession().get(Company.class, id);
-            if (obj == null) halt(404);
-            return obj;
-        }, new JsonTransformer());
-
-        post("dbeb/companies", "application/json", (request, response) -> {
-            Company obj = JacksonUtil.readValue(request.body(), Company.class);
-            HibernateUtil.getSession().saveOrUpdate(obj);
-            response.status(201);
-            return obj;
-        }, new JsonTransformer());
-
-        put("dbeb/companies/:id", "application/json", (request, response) -> {
-            long id = Long.parseLong(request.params(":id"));
-            Company obj = (Company)HibernateUtil.getSession().get(Company.class, id);
-            if (obj == null) halt(404);
-            obj = JacksonUtil.readValue(request.body(), Company.class);
-            obj = (Company)HibernateUtil.getSession().merge(obj);
-            return obj;
-        }, new JsonTransformer());
-
-        delete("dbeb/companies/:id", (request, response) -> {
-            long id = Long.parseLong(request.params(":id"));
-            Company obj = (Company)HibernateUtil.getSession().get(Company.class, id);
-            if (obj == null) halt(404);
-            HibernateUtil.getSession().delete(obj);
-            response.status(204);
-            return "";
-        });
-        
-        get("dbeb/locations", "application/json", (request, response) -> {
-            List<Location> objs = HibernateUtil.getSession().createCriteria(Location.class).list();
-            return objs;
-        }, new JsonTransformer());
-
-        get("dbeb/locations/:id", "application/json", (request, response) -> {
-            long id = Long.parseLong(request.params(":id"));
-            Location obj = (Location)HibernateUtil.getSession().get(Location.class, id);
-            if (obj == null) halt(404);
-            return obj;
-        }, new JsonTransformer());
-
-        post("dbeb/locations", "application/json", (request, response) -> {
-            Location obj = JacksonUtil.readValue(request.body(), Location.class);
-            HibernateUtil.getSession().saveOrUpdate(obj);
-            response.status(201);
-            return obj;
-        }, new JsonTransformer());
-
-        put("dbeb/locations/:id", "application/json", (request, response) -> {
-            long id = Long.parseLong(request.params(":id"));
-            Location obj = (Location)HibernateUtil.getSession().get(Location.class, id);
-            if (obj == null) halt(404);
-            obj = JacksonUtil.readValue(request.body(), Location.class);
-            obj = (Location)HibernateUtil.getSession().merge(obj);
-            return obj;
-        }, new JsonTransformer());
-
-        delete("dbeb/locations/:id", (request, response) -> {
-            long id = Long.parseLong(request.params(":id"));
-            Location obj = (Location)HibernateUtil.getSession().get(Location.class, id);
-            if (obj == null) halt(404);
-            HibernateUtil.getSession().delete(obj);
-            response.status(204);
-            return "";
-        });
-        
 
         before((request, response) -> {
             HibernateUtil.getSession().beginTransaction();

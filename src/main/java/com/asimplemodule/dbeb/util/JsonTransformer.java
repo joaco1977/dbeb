@@ -1,7 +1,5 @@
 package com.asimplemodule.dbeb.util;
 
-import spark.Request;
-import spark.Response;
 import spark.ResponseTransformer;
 
 public class JsonTransformer implements ResponseTransformer {

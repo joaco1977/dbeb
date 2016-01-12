@@ -20,5 +20,6 @@
         <mapping class="com.asimplemodule.dbeb.models.Recommendation"/>
         <mapping class="com.asimplemodule.dbeb.models.Company"/>
         <mapping class="com.asimplemodule.dbeb.models.Location"/>
+        <mapping class="com.asimplemodule.dbeb.models.Tag"/>
     </session-factory>
 </hibernate-configuration>

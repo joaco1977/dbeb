@@ -13,33 +13,20 @@
                 <h4 class="modal-title" id="myRecommendationLabel">Datos de la Recommendación</h4>
             </div>
             <div class="modal-body">
-                
-
-                
-                <div class="form-group">
-                    <label>Título:</label>
-                    
-                    <input type="text" class="form-control" name="name"
-                           ng-model="recommendation.name" ng-required="true"
-                           ng-minlength="4" ng-maxlength="65"/>
-                    <span class="error" ng-show="form.name.$error.minlength">Must be at least 4
-                     characters.</span>
-                    <span class="error" ng-show="form.name.$error.maxlength">Must be at most 65 characters.</span>
-                </div>
-                
-                
+                                
                 <div class="form-group">
                     <label>Nombre de la Empresa o Persona:</label>
                     
-                    <input type="text" class="form-control" name="companyName"
-                           ng-model="companyName" ng-required="true"/>
+                    <input type="text" class="form-control" name="recommendation.company.name"
+                           ng-model="recommendation.company.name" ng-required="true"/>
                     
                 </div>
 
                 <div class="form-group move-down">
-                        <label for="Autocomplete">Ubicación:</label>
-                            <input class="form-control" type="text" id="Autocomplete" ng-autocomplete 
-                            ng-model="result" details="details" options="options" />
+                        <label for="Autocomplete2">Ubicación:</label>
+                            <input class="form-control" id="Autocomplete2" ng-autocomplete 
+                            ng-model="recommendation.company.location.formattedAddress" 
+							details="recommendation.company.location.details" options="options" />
                 </div>
 
                 
@@ -70,7 +57,12 @@
                     <input type="text" class="form-control" name="recodate" ui-date="recodateDateOptions" ui-date-format="yy-mm-dd" 
                            ng-model="recommendation.recodate" ng-required="true"/>
                 </div>
-                
+				
+				<div class="form-group">
+					<tags-input ng-model="tags">
+ 						<auto-complete source="loadItems($query)"></auto-complete>
+					</tags-input>
+                </div>
 
             </div>
             <div class="modal-footer">
@@ -80,67 +72,40 @@
             </div>
         </form>
     </script>
-
-    <button ng-show="isLoggedIn('facebook')" class="btn btn-primary btn-lg" ng-click="create()">
-        <span class="glyphicon glyphicon-flash"></span>Recomendá a alguien
-    </button>
-
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                
-                <th>name</th>
-                
-                <th>info</th>
-                
-                <th>active</th>
-                
-                <th>companyId</th>
-                
-                <th>detail</th>
-                
-                <th>votes</th>
-                
-                <th>recodate</th>
-                
-                <th>createUserEmail</th>
-                
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="recommendation in recommendations">
-                
-                <td>{{recommendation.name }}</td>
-                
-                <td>{{recommendation.info }}</td>
-                
-                <td>{{recommendation.active }}</td>
-                
-                <td>{{recommendation.companyId }}</td>
-                
-                <td>{{recommendation.detail }}</td>
-                
-                <td>{{recommendation.votes }}</td>
-                
-                <td>{{recommendation.recodate  | date:'yyyy-MM-dd'}}</td>
-                
-                <td>{{recommendation.createUserEmail }}</td>
-                
-                <td>
-                    <button type="submit"
-                            ng-click="update(recommendation.id)"
-                            class="btn">
-                        <span class="glyphicon glyphicon-pencil"></span> Edit
-                    </button>
-                    <button type="submit"
-                            ng-click="delete(recommendation.id)"
-                            class="btn btn-danger">
-                        <span class="glyphicon glyphicon-remove-circle"></span> Delete
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+	
+	
+	
+	<div class="button-container">
+		<a ng-show="isLoggedIn('facebook')" href="#" ng-click="create()"
+		class="btn btn-warning btn-large create-button pull-right">
+			<i class="icon-white icon-search"></i>Recomendá a alguien
+		</a>
     </div>
+	    <div class="form-group search">
+	    	<div class="input-container">
+			      <input type="text" ng-model="searchText" class="form-control" 
+			      placeholder="Ingresa lo que quieras buscar...">
+			</div>      
+	  	</div>
+	  	
+	  	<div class="results" ng-show="recommendations.length">
+		  	<div ng-repeat="recommendation in recommendations | filter: searchText" class="row">
+		  		<div class="col-md-3">{{recommendation.company.name }}</div>
+		  		<div class="col-md-3">{{recommendation.recodate  | date:'yyyy-MM-dd'}}</div>
+		  		<div class="col-md-3">{{recommendation.votes }}</div>
+		  		<div class="col-md-3">
+		  			<button type="submit"
+	                            ng-click="update(recommendation.id)"
+	                            class="btn">
+	                        <span class="glyphicon glyphicon-pencil"></span> Detalle
+	                    </button>
+		  		</div>
+		  	</div>
+		 </div>
+		 <div class="no-data" ng-hide="recommendations.length">
+		 	<div class="message-init">
+		 		<span>Animate! Es fácil encontrar lo que necesitas</span>
+		 	</div>
+		 </div>
+		  	
 </div>
