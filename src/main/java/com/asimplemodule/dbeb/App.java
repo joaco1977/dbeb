@@ -29,7 +29,7 @@ public class App {
 
 	
     public static void main(final String[] args) {
-        setPort(8080);
+        setPort(50845);
         externalStaticFileLocation("public"); // Static files
 
         get("/", (request, response) -> {

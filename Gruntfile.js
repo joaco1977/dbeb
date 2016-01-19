@@ -40,13 +40,13 @@ module.exports = function (grunt) {
         {
           context: '/dbeb',
           host: '0.0.0.0',
-          port: 8080,
+          port: 50845,
           https: false,
           changeOrigin: false
         }
       ],
       options: {
-        port: 9000,
+        port: 50846,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: '0.0.0.0',
         livereload: 35729
