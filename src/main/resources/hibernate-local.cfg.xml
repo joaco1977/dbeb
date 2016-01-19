@@ -21,5 +21,6 @@
         <mapping class="com.asimplemodule.dbeb.models.Company"/>
         <mapping class="com.asimplemodule.dbeb.models.Location"/>
         <mapping class="com.asimplemodule.dbeb.models.Tag"/>
+        <mapping class="com.asimplemodule.dbeb.models.RecoTag"/>
     </session-factory>
 </hibernate-configuration>

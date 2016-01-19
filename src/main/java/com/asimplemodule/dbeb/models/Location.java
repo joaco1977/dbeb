@@ -1,5 +1,7 @@
 package com.asimplemodule.dbeb.models;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,9 +20,15 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "locations")
-public class Location {
+public class Location implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5656197963107189548L;
+
+
+	@Id
     @GeneratedValue
     private long id;
 

@@ -14,12 +14,16 @@ import static spark.SparkBase.setPort;
 import java.util.List;
 
 import com.asimplemodule.dbeb.models.Company;
+import com.asimplemodule.dbeb.models.Tag;
 import com.asimplemodule.dbeb.models.Location;
 import com.asimplemodule.dbeb.models.Recommendation;
 import com.asimplemodule.dbeb.models.User;
 import com.asimplemodule.dbeb.util.HibernateUtil;
 import com.asimplemodule.dbeb.util.JacksonUtil;
 import com.asimplemodule.dbeb.util.JsonTransformer;
+
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 
 public class App {
 
@@ -88,6 +92,8 @@ public class App {
             
             HibernateUtil.getSession().save(reco);
             
+            reco.addAutomaticTags();
+            
             response.status(201);
             return reco;
         }, new JsonTransformer());
@@ -110,7 +116,12 @@ public class App {
             return "";
         });
         
-
+        get("dbeb/tags", "application/json", (request, response) -> {
+            String name = request.queryParams("name");
+            List<Tag> objs = HibernateUtil.getSession().createCriteria(Tag.class).add(
+                    Restrictions.ilike("name",name,MatchMode.START)).list();
+            return objs;
+        }, new JsonTransformer());
 
         before((request, response) -> {
             HibernateUtil.getSession().beginTransaction();

@@ -5,9 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>De Boca en Boca</title>
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
   <link href="lib/bootstrap-css/css/bootstrap.css" rel="stylesheet">
   <link href="lib/jquery-ui/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
   <link href="lib/bootstrap-social/bootstrap-social.css" rel="stylesheet">
+  <link href="lib/brandbuttons/dist/brand-buttons.css" rel="stylesheet">
+  <link href="lib/brandbuttons/dist/brand-buttons-inversed.css" rel="stylesheet">
   <link href="lib/ng-tags-input/ng-tags-input.css" rel="stylesheet">
   <link href="lib/ng-tags-input/ng-tags-input.bootstrap.css" rel="stylesheet">
   <link href="css/app.css" rel="stylesheet">
@@ -31,12 +34,12 @@
        <ul class="nav navbar-nav">
          
          <li>
-         <a href="/#/recommendations">Encontrá lo que estas buscado!</a>
+         <a href="/#/recommendations">Encontrá lo que estas buscando!</a>
          </li>
          
        </ul>
 
-        <ul class="nav navbar-nav last">
+        <ul class="nav navbar-nav last pull-right">
         <li class="pull-right facebook" ng-controller="LoginController">
             <div class="user-info" ng-show="isLoggedIn('facebook')">Bienvenido {{currentUser.fullName}}</div>
             <button ng-show="!isLoggedIn('facebook')" ng-click="login('facebook')" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</button>
@@ -56,9 +59,10 @@
   <script src="lib/angular/angular.js"></script>
   <script src="lib/angular-resource/angular-resource.js"></script>
   <script src="lib/angular-route/angular-route.js"></script>
-  <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="lib/angular-bootstrap/bootstrap-bower-0.14.3/ui-bootstrap-tpls.js"></script>
   <script src="lib/angular-ui-date/src/date.js"></script>
   <script src="lib/angular-cookies/angular-cookies.js"></script>
+  <script src="lib/angular-animate/angular-animate.js"></script>
   <script src="lib/hello/dist/hello.all.js"></script>
   <script src="lib/ng-hello/dist/ng-hello.js"></script>
   <!--<script src="lib/google-maps/lib/Google.js"></script>-->
@@ -89,6 +93,8 @@
 
   <script src="js/login/login-service.js"></script>
   <script src="js/login/login-controller.js"></script>
+
+  <script src="js/tag/tag-service.js"></script>
   
 </body>
 </html>

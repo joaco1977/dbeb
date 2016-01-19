@@ -1,13 +1,22 @@
 'use strict';
 
 angular.module('dbeb')
-  .controller('RecommendationController', ['$scope', '$modal', 'resolvedRecommendation',
-   'Recommendation','Auth',
-    function ($scope, $modal, resolvedRecommendation, Recommendation,Auth) {
+  .controller('RecommendationController', ['$scope', '$uibModal', 'resolvedRecommendation',
+   'Recommendation','Auth','Tag',
+    function ($scope, $modal, resolvedRecommendation, Recommendation,Auth,Tag) {
 
       $scope.result = '';
       //$scope.details = '';
       $scope.options = {};
+
+      
+      $scope.max = 5;
+      $scope.isReadonly = true;
+
+      $scope.hoveringOver = function(value) {
+        $scope.overStar = value;
+        $scope.percent = 100 * (value / $scope.max);
+      };
 
       $scope.recommendations = resolvedRecommendation;
 
@@ -44,6 +53,8 @@ angular.module('dbeb')
           
           delete $scope.recommendation.company.location.details;
           
+          
+          
           Recommendation.save($scope.recommendation,
             function () {
               $scope.recommendations = Recommendation.query();
@@ -60,8 +71,6 @@ angular.module('dbeb')
           "info": "",
           
           "active": "",
-          
-          "companyId": "",
           
           "detail": "",
           
@@ -97,8 +106,8 @@ angular.module('dbeb')
         });
       };
     }])
-  .controller('RecommendationSaveController', ['$scope', '$modalInstance', 'recommendation',
-    function ($scope, $modalInstance, recommendation) {
+  .controller('RecommendationSaveController', ['$scope', '$uibModalInstance', '$http','recommendation','Tag',
+    function ($scope, $modalInstance,$http, recommendation,Tag) {
       $scope.recommendation = recommendation;
 
       
@@ -109,8 +118,14 @@ angular.module('dbeb')
       $scope.recommendation.company.location = {};
       $scope.recommendation.company.location.details = {};
       $scope.recommendation.company.location.formattedAddress = '';
+      $scope.recommendation.tags = [];
 
-      $scope.votes = 0;
+      
+
+      if(!$scope.recommendation.id) {
+        $scope.recommendation.votes = 0;
+      }
+      
       $scope.max = 5;
       $scope.isReadonly = false;
       
@@ -121,8 +136,14 @@ angular.module('dbeb')
       };
       
       $scope.recodateDateOptions = {
-        dateFormat: 'yy-mm-dd',
+        dateFormat: 'yyyy-mm-dd',
         maxDate: -1
+        
+      };
+      
+      $scope.loadTags = function(query) {
+    	  
+        return $http.get('dbeb/tags?name=' + query);
         
       };
 

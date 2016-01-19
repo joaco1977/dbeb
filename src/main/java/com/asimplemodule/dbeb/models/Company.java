@@ -1,5 +1,7 @@
 package com.asimplemodule.dbeb.models;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,9 +23,15 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "companies")
-public class Company {
+public class Company implements Serializable{
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3473867753947291780L;
+
+
+	@Id
     @GeneratedValue
     private long id;
 

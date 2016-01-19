@@ -1,13 +1,19 @@
 package com.asimplemodule.dbeb.models;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -15,16 +21,23 @@ import lombok.ToString;
 @Setter
 @EqualsAndHashCode
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "tags")
-public class Tag {
+public class Tag implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7624281660829481097L;
+
+	@Id
     @GeneratedValue
     private long id;
 
-    
-    @Column(name = "name")
+    @JsonProperty(value="text")
+    @Column(name = "name",unique=true)
     private String name;
     
     
