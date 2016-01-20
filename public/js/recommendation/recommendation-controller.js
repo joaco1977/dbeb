@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dbeb')
-  .controller('RecommendationController', ['$scope', '$uibModal', 'resolvedRecommendation',
+  .controller('RecommendationController', ['$scope', '$modal', 'resolvedRecommendation',
    'Recommendation','Auth','Tag',
     function ($scope, $modal, resolvedRecommendation, Recommendation,Auth,Tag) {
 
@@ -106,7 +106,7 @@ angular.module('dbeb')
         });
       };
     }])
-  .controller('RecommendationSaveController', ['$scope', '$uibModalInstance', '$http','recommendation','Tag',
+  .controller('RecommendationSaveController', ['$scope', '$modalInstance', '$http','recommendation','Tag',
     function ($scope, $modalInstance,$http, recommendation,Tag) {
       $scope.recommendation = recommendation;
 
