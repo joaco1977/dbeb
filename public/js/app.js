@@ -1,11 +1,11 @@
   // Declare app level module which depends on filters, and services
-angular.module('dbeb', ['ngResource','ngRoute', 'ui.bootstrap', 
+angular.module('dbeb', ['ngResource','ngRoute', 'ui.bootstrap','ui.bootstrap.tpls',
                         'ui.date','ngCookies','ngHello','ngAutocomplete','ngTagsInput','ngAnimate'])
  	.config(['$routeProvider','$locationProvider','$httpProvider','helloProvider',
  	         function ($routeProvider,$locationProvider,$httpProvider,helloProvider) {
   	
  	helloProvider.init({
- 	          facebook: '849164405198575'
+ 	          facebook: '373314332783587'
  	});
  		
 	  $routeProvider

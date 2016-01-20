@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('dbeb')
-  .controller('RecommendationController', ['$scope', '$modal', 'resolvedRecommendation',
+  .controller('RecommendationController', ['$scope', '$uibModal', 'resolvedRecommendation',
    'Recommendation','Auth','Tag',
-    function ($scope, $modal, resolvedRecommendation, Recommendation,Auth,Tag) {
+    function ($scope, $uibModal, resolvedRecommendation, Recommendation,Auth,Tag) {
 
       $scope.result = '';
       //$scope.details = '';
@@ -89,7 +89,7 @@ angular.module('dbeb')
        }
 
       $scope.open = function (id) {
-        var recommendationSave = $modal.open({
+        var recommendationSave = $uibModal.open({
           templateUrl: 'recommendation-save.html',
           controller: 'RecommendationSaveController',
           size: 'lg',
@@ -106,8 +106,8 @@ angular.module('dbeb')
         });
       };
     }])
-  .controller('RecommendationSaveController', ['$scope', '$modalInstance', '$http','recommendation','Tag',
-    function ($scope, $modalInstance,$http, recommendation,Tag) {
+  .controller('RecommendationSaveController', ['$scope', '$uibModalInstance', '$http','recommendation','Tag',
+    function ($scope, $uibModalInstance,$http, recommendation,Tag) {
       $scope.recommendation = recommendation;
 
       
@@ -148,10 +148,10 @@ angular.module('dbeb')
       };
 
       $scope.ok = function () {
-        $modalInstance.close($scope.recommendation);
+        $uibModalInstance.close($scope.recommendation);
       };
 
       $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
+        $uibModalInstance.dismiss('cancel');
       };
     }]);
