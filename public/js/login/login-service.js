@@ -11,7 +11,9 @@ angular.module('dbeb')
 
       
       login: function(socialNet){
-        hello(socialNet).login();
+        hello(socialNet).login({scope: 'email',
+        force: true});
+
 
       },
 
