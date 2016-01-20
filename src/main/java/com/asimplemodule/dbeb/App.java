@@ -39,7 +39,12 @@ public class App {
 
         
         get("dbeb/users", "application/json", (request, response) -> {
-            List<User> objs = HibernateUtil.getSession().createCriteria(User.class).list();
+        	
+        	String email = request.queryParams("facebookId");
+        	
+            List<User> objs = HibernateUtil.getSession().createCriteria(User.class)
+            		.add(Restrictions.eq("facebookId",email)).list();
+            
             return objs;
         }, new JsonTransformer());
 
