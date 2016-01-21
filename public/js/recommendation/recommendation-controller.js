@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('dbeb')
-  .controller('RecommendationController', ['$scope', '$uibModal', 'resolvedRecommendation',
-   'Recommendation','Auth','Tag',
-    function ($scope, $uibModal, resolvedRecommendation, Recommendation,Auth,Tag) {
+  .controller('RecommendationController', ['$scope', '$uibModal',
+   'Recommendation','resolvedRecommendation','Auth','Tag','Reddit',
+    function ($scope, $uibModal, Recommendation,resolvedRecommendation,Auth,Tag,Reddit) {
+
+      $scope.reddit = new Reddit();
 
       $scope.result = '';
       //$scope.details = '';
@@ -30,19 +32,20 @@ angular.module('dbeb')
         $scope.open(id);
       };
 
-      $scope.delete = function (id) {
+      /*$scope.delete = function (id) {
         Recommendation.delete({id: id},
           function () {
             $scope.recommendations = Recommendation.query();
           });
-      };
+      };*/
 
       $scope.save = function (id) {
         if (id) {
           Recommendation.update({id: id}, $scope.recommendation,
             function () {
-              $scope.recommendations = Recommendation.query();
               $scope.clear();
+              $scope.recommendations = Recommendation.query();
+              
             });
         } else {
         	
@@ -53,7 +56,7 @@ angular.module('dbeb')
           
           delete $scope.recommendation.company.location.details;
           
-          
+          $scope.recommendation.createUser = $scope.currentUser;
           
           Recommendation.save($scope.recommendation,
             function () {
@@ -77,8 +80,6 @@ angular.module('dbeb')
           "votes": "",
           
           "recodate": "",
-          
-          "createUserEmail": "",
           
           "id": ""
         };

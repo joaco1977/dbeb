@@ -13,12 +13,21 @@
                 <h4 class="modal-title" id="myRecommendationLabel">Datos de la Recommendación</h4>
             </div>
             <div class="modal-body">
-                                
+                 
+
                 <div class="form-group">
                     <label>Nombre de la Empresa o Persona:</label>
                     
                     <input type="text" class="form-control" name="recommendation.company.name"
                            ng-model="recommendation.company.name" ng-required="true"/>
+                    
+                </div>
+
+                <div class="form-group">
+                    <label>Facebook de la Empresa o Persona:</label>
+                    
+                    <input type="text" class="form-control" name="recommendation.company.facebook"
+                           ng-model="recommendation.company.facebook"/>
                     
                 </div>
 
@@ -50,12 +59,6 @@
                         
                 </div>
                 
-                <div class="form-group">
-                    <label>Fecha en que se realizó el servicio:</label>
-                    
-                    <input type="text" class="form-control" name="recodate" ui-date="recodateDateOptions" ui-date-format="yy-mm-dd" 
-                           ng-model="recommendation.recodate" ng-required="true"/>
-                </div>
 				
 				<div class="form-group">
 					<tags-input class="bootstrap" ng-model="recommendation.tags" placeholder="Agrega Tags..">
@@ -93,41 +96,48 @@
 			</div>      
 	  	</div>
 	  	
-        <div>
-        
-                    
-        </div>            
+                 
 	  	<div class="results" ng-show="recommendations.length">
-		  	<div ng-repeat="recommendation in recommendations | filter: searchText" class="row">
-		  		<div class="col-md-6">{{recommendation.company.name }}</div>
-                <div class="col-md-6">{{recommendation.detail }}</div>
-		  		<div class="col-md-6">{{recommendation.recodate  | date:'yy-MM-dd'}}</div>
-                <div class="col-md-6">
-                   
-                   <uib-rating ng-model="recommendation.votes" max="max" readonly="true" state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'" aria-labelledby="custom-icons-1">
-                    </uib-ating>
+		<!-- <div class="results" infinite-scroll="reddit.nextPage()" infinite-scroll-disabled="reddit.busy" 
+            infinite-scroll-distance="1" infinite-scroll-immediate-check="true" ng-show="reddit.length"> -->
+                <div ng-repeat="recommendation in recommendations | filter: searchText" class="row">
+    		  		<div class="col-md-8">{{recommendation.company.name }}</div>
+                    <div class="col-md-8">
+                        <a target="_blank" ng-href="{{recommendation.createUser.facebookUrl}}">{{recommendation.createUser.fullName}}
+                            <img class="profile-image" ng-src="{{recommendation.createUser.pictureUrl}}"/>
+                        </a>
+                    </div>
+                    <div class="col-md-8">{{recommendation.company.location.formattedAddress }}</div>
+                    <div class="col-md-8">{{recommendation.detail }}</div>
+    		  		<div class="col-md-8">{{recommendation.recodate  | date:'yyyy-MM-dd'}}</div>
+                    <div class="col-md-8">
+                       
+                       <uib-rating ng-model="recommendation.votes" max="max" readonly="true" state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'" aria-labelledby="custom-icons-1">
+                        </uib-ating>
 
-                   
-                </div>    
-                <div class="col-md-6">
-                   
+                       
+                    </div>    
+                    <div class="col-md-8">
+                       
 
-                   <tags-input ng-disabled="true" class="bootstrap invalid-tag" ng-model="recommendation.tags" readonly="true">
-                    </tags-input>
+                       <tags-input ng-disabled="true" class="bootstrap invalid-tag" ng-model="recommendation.tags" readonly="true">
+                        </tags-input>
+                    </div>
+    		  		<div class="col-md-8">
+    		  			<!-- <button type="submit"
+    	                            ng-click="update(recommendation.id)"
+    	                            class="btn">
+    	                        <span class="glyphicon glyphicon-pencil"></span> Detalle
+    	                    </button> -->
+    		  		</div>
+                    <div style="clear: both;"></div>
+    		    </div>
+                <div ng-show="reddit.busy">Loading data...</div>
+		</div>
+    	 
+        <!-- </div> -->
+        <div class="no-data" ng-hide="recommendations.length">
+                <div class="message-init">
+                    <span>Animate! Es fácil encontrar lo que necesitas</span>
                 </div>
-		  		<div class="col-md-6">
-		  			<button type="submit"
-	                            ng-click="update(recommendation.id)"
-	                            class="btn">
-	                        <span class="glyphicon glyphicon-pencil"></span> Detalle
-	                    </button>
-		  		</div>
-		  	</div>
-		 </div>
-		 <div class="no-data" ng-hide="recommendations.length">
-		 	<div class="message-init">
-		 		<span>Animate! Es fácil encontrar lo que necesitas</span>
-		 	</div>
-		 </div>
-		  	
-</div>
+        </div>

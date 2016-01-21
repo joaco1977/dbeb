@@ -178,3 +178,11 @@ body {
   color: #262626;
   background-color: #ffff00;
 }
+
+
+/********profile image**********/
+
+.profile-image {
+  border-radius: 12px;
+  margin-left: 5px;
+}

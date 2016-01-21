@@ -51,7 +51,8 @@ angular.module('dbeb')
            var query = User.query({facebookId: r.email})
            query.$promise.then(function(data) {
               if(data.length == 0)  {
-                  var user = new User ({facebookId: r.email,firstName: r.first_name, lastName: r.last_name, picture: r.picture});
+                  var user = new User ({facebookId: r.email,
+                    firstName: r.first_name, lastName: r.last_name, facebookIdentifier: r.id});
                   $rootScope.currentUser = user.$save();
               } else {
                 $rootScope.currentUser = data[0];

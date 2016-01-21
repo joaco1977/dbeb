@@ -69,11 +69,12 @@ public class Recommendation implements Serializable {
     private Integer votes;
     
     @Column(name = "recodate")
-    @Past
     private Date recodate;
     
-    @Column(name = "createUserEmail", length = 65)
-    private String createUserEmail;
+    
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="createUserId")
+    private User createUser;
     
     
     @ManyToOne(cascade=CascadeType.ALL)

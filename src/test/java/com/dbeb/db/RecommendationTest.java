@@ -37,7 +37,7 @@ public class RecommendationTest extends AbstractTest {
 		reco.setCompany(company);
 		reco.setDetail("detailsssssssss");
 		reco.setRecodate(new Date());
-		reco.setCreateUserEmail("jaoquincabal@gmail.com");
+		//reco.setCreateUserEmail("jaoquincabal@gmail.com");
 		reco.setActive(true);
 		reco.setVotes(3);
 		

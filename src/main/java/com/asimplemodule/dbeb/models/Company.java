@@ -48,7 +48,6 @@ public class Company implements Serializable{
     
     
     @Column(name = "facebook", length = 65)
-    @Size(min = 4, max = 65)
     private String facebook;
     
     @Column(name = "email", length = 65)
@@ -58,6 +57,9 @@ public class Company implements Serializable{
     @Column(name = "webSite")
     @Size(min = 10)
     private String webSite;
+    
+    @Column(name = "phone")
+    private String phone;
     
     
     @OneToOne(cascade=CascadeType.ALL)
