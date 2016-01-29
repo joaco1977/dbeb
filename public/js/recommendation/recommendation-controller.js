@@ -2,10 +2,21 @@
 
 angular.module('dbeb')
   .controller('RecommendationController', ['$scope', '$uibModal',
-   'Recommendation','resolvedRecommendation','Auth','Tag','Reddit',
-    function ($scope, $uibModal, Recommendation,resolvedRecommendation,Auth,Tag,Reddit) {
+   'Recommendation','resolvedRecommendation','Auth','Tag',
+    function ($scope, $uibModal, Recommendation,
+      resolvedRecommendation,Auth,Tag) {
 
-      $scope.reddit = new Reddit();
+
+
+      $scope.nextPage = function() {
+        var tempReco = Recommendation.query();
+
+        for(var i = 0; i< tempReco.length;i++) {
+            $scope.recommendations.push(tempReco[i]);
+        }
+
+      };
+      $scope.recommendations = resolvedRecommendation;
 
       $scope.result = '';
       //$scope.details = '';
@@ -15,12 +26,13 @@ angular.module('dbeb')
       $scope.max = 5;
       $scope.isReadonly = true;
 
+
       $scope.hoveringOver = function(value) {
         $scope.overStar = value;
         $scope.percent = 100 * (value / $scope.max);
       };
 
-      $scope.recommendations = resolvedRecommendation;
+      
 
       $scope.create = function () {
         $scope.clear();

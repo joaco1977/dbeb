@@ -98,8 +98,7 @@
 	  	
                  
 	  	<div class="results" ng-show="recommendations.length">
-		<!-- <div class="results" infinite-scroll="reddit.nextPage()" infinite-scroll-disabled="reddit.busy" 
-            infinite-scroll-distance="1" infinite-scroll-immediate-check="true" ng-show="reddit.length"> -->
+		<div lr-infinite-scroll="nextPage()"  scroll-threshold="200" time-threshold="600">
                 <div ng-repeat="recommendation in recommendations | filter: searchText" class="row">
     		  		<div class="col-md-8">{{recommendation.company.name }}</div>
                     <div class="col-md-8">
@@ -133,7 +132,8 @@
                     <div style="clear: both;"></div>
     		    </div>
                 <div ng-show="reddit.busy">Loading data...</div>
-		</div>
+		  </div>
+        </div>
     	 
         <!-- </div> -->
         <div class="no-data" ng-hide="recommendations.length">

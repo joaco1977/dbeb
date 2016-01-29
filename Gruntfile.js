@@ -65,13 +65,13 @@ module.exports = function (grunt) {
           }
         }
       },
-      /*
+      
       dist: {
         options: {
           base: '<%= yeoman.dist %>'
         }
       }
-      */
+      
     },
     // Put files not handled in other tasks here
     copy: {
@@ -103,7 +103,9 @@ module.exports = function (grunt) {
         }
       }
     }
-  });
+
+});
+  
 
   grunt.registerTask('server', function (target) {
     grunt.task.run([
@@ -113,4 +115,6 @@ module.exports = function (grunt) {
       'watch'
     ]);
   });
+  
+  
 };
