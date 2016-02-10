@@ -43,7 +43,7 @@
         <li class="pull-right facebook" ng-controller="LoginController">
             <div class="user-info" ng-show="isLoggedIn('facebook')">
               Bienvenido {{currentUser.fullName}}!
-              <img class="profile-image" ng-src="{{currentUser.picture}}"/>
+              <img class="profile-image" ng-src="{{currentUser.pictureUrl}}"/>
               </div>
             <button ng-show="!isLoggedIn('facebook')" ng-click="login('facebook')" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</button>
 
@@ -71,7 +71,7 @@
   <script src="lib/ng-hello/dist/ng-hello.js"></script>
   <!--<script src="lib/google-maps/lib/Google.js"></script>-->
   <script src="lib/ngAutocomplete/src/ngAutocomplete.js"></script>
-  <script src="lib/lrInfiniteScroll/lrInfiniteScroll.js"></script>
+  <script src="lib/tagged-infinite-scroll/taggedInfiniteScroll.js"></script>
   <script src="lib/ng-tags-input/ng-tags-input.js"></script>
   <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places">
   </script>
@@ -88,14 +88,6 @@
   <script src="js/recommendation/recommendation-router.js"></script>
   <script src="js/recommendation/recommendation-service.js"></script>
   
-  <script src="js/company/company-controller.js"></script>
-  <script src="js/company/company-router.js"></script>
-  <script src="js/company/company-service.js"></script>
-  
-  <script src="js/location/location-controller.js"></script>
-  <script src="js/location/location-router.js"></script>
-  <script src="js/location/location-service.js"></script>
-
   <script src="js/login/login-service.js"></script>
   <script src="js/login/login-controller.js"></script>
 
