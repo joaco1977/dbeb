@@ -6,11 +6,6 @@ angular.module('dbeb')
       .when('/recommendations', {
         templateUrl: 'views/recommendation/recommendations.html',
         controller: 'RecommendationController',
-        authenticate: false,
-        resolve:{
-          resolvedRecommendation: ['Recommendation', function (Recommendation) {
-            return Recommendation.query();
-          }]
-        }
+        authenticate: false
       })
     }]);

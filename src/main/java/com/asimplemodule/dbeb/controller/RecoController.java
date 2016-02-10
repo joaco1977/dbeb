@@ -16,23 +16,21 @@ import com.asimplemodule.dbeb.util.JsonTransformer;
 
 public class RecoController {
 	
-	public static final Integer QUANTITY = 3;
+	public static final Integer QUANTITY = 4;
 	public RecoController() {
 		
 		get("dbeb/recommendations", "application/json", (request, response) -> {
-	        
-//			int from = 0;
-//			
-//			String fromParam = request.queryParams("from");
-//			
-//			if(fromParam != null ){
-//				from = Integer.valueOf(fromParam);
-//			}
 			
-//			List<Recommendation> objs = HibernateUtil.getSession().createCriteria(Recommendation.class)
-//					.setFirstResult(from).setMaxResults(QUANTITY).list();
+			int from = 0;
 			
-			List<Recommendation> objs = HibernateUtil.getSession().createCriteria(Recommendation.class).list();
+			String offset = request.queryParams("offset");
+			
+			if(offset != null ){
+				from = Integer.valueOf(offset);
+			}
+			
+			List<Recommendation> objs = HibernateUtil.getSession().createCriteria(Recommendation.class)
+					.setFirstResult(from).setMaxResults(QUANTITY).list();
 			
 	        return objs;
 	    }, new JsonTransformer());

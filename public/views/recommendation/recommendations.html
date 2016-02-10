@@ -35,7 +35,9 @@
                         <label for="Autocomplete2">Ubicación:</label>
                             <input class="form-control" id="Autocomplete2" ng-autocomplete 
                             ng-model="recommendation.company.location.formattedAddress" 
-							details="recommendation.company.location.details" options="options" />
+							details="recommendation.company.location.details" 
+							placeholder="Ubicacion - Podes ingresar domicilio directamente o bien la Ciudad..." 
+							options="options" />
                 </div>
 
                 
@@ -98,7 +100,7 @@
 	  	
                  
 	  	<div class="results" ng-show="recommendations.length">
-		<div lr-infinite-scroll="nextPage()"  scroll-threshold="200" time-threshold="600">
+            <div tagged-infinite-scroll="nextPage()" ng-class="{fetching: fetching}">
                 <div ng-repeat="recommendation in recommendations | filter: searchText" class="row">
     		  		<div class="col-md-8">{{recommendation.company.name }}</div>
                     <div class="col-md-8">
@@ -130,9 +132,9 @@
     	                    </button> -->
     		  		</div>
                     <div style="clear: both;"></div>
+                    <span ng-show="isLoading" class="ng-hide">Loading...</span>
     		    </div>
-                <div ng-show="reddit.busy">Loading data...</div>
-		  </div>
+            </div>    
         </div>
     	 
         <!-- </div> -->

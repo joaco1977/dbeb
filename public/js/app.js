@@ -1,6 +1,7 @@
   // Declare app level module which depends on filters, and services
 angular.module('dbeb', ['ngResource','ngRoute', 'ui.bootstrap','ui.bootstrap.tpls',
-                        'ui.date','ngCookies','ngHello','ngAutocomplete','ngTagsInput','ngAnimate'])
+                        'ui.date','ngCookies','ngHello','ngAutocomplete','ngTagsInput',
+                        'ngAnimate','tagged.directives.infiniteScroll'])
  	.config(['$routeProvider','$locationProvider','$httpProvider','helloProvider',
  	         function ($routeProvider,$locationProvider,$httpProvider,helloProvider) {
   	
