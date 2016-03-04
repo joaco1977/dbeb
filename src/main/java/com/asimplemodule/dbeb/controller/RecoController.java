@@ -7,9 +7,9 @@ import static spark.Spark.post;
 import static spark.Spark.put;
 
 import java.util.Date;
-import java.util.List;
 
 import com.asimplemodule.dbeb.models.Recommendation;
+import com.asimplemodule.dbeb.service.RecoService;
 import com.asimplemodule.dbeb.util.HibernateUtil;
 import com.asimplemodule.dbeb.util.JacksonUtil;
 import com.asimplemodule.dbeb.util.JsonTransformer;
@@ -17,22 +17,28 @@ import com.asimplemodule.dbeb.util.JsonTransformer;
 public class RecoController {
 	
 	public static final Integer QUANTITY = 4;
+	
+	
+	
+	
 	public RecoController() {
+		
 		
 		get("dbeb/recommendations", "application/json", (request, response) -> {
 			
+			 
 			int from = 0;
 			
 			String offset = request.queryParams("offset");
-			
 			if(offset != null ){
 				from = Integer.valueOf(offset);
 			}
 			
-			List<Recommendation> objs = HibernateUtil.getSession().createCriteria(Recommendation.class)
-					.setFirstResult(from).setMaxResults(QUANTITY).list();
+			String searchText = request.queryParams("searchText");
 			
-	        return objs;
+			
+	        return RecoService.getInstance().findRecoByText(searchText, from, QUANTITY);
+	        
 	    }, new JsonTransformer());
 
 	    get("dbeb/recommendations/:id", "application/json", (request, response) -> {

@@ -1,0 +1,17 @@
+<div class="modal-body">
+
+	
+	<div>
+	
+	  <ng-map zoom="15" center="{{location.latitude}}, {{location.longitude}}">	  	
+	  	 <marker position="{{location.latitude}}, {{location.longitude}}">
+        </marker>
+	  </ng-map>
+	</div>
+
+
+</div>
+<div class="modal-footer">
+		<button type="button" class="btn btn-default" ng-click="cancel()">Cerrar
+		</button>
+</div>

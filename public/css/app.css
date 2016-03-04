@@ -1,29 +1,18 @@
 body {
-  margin-top: 60px;
-  background-color: #ECF0F1;
 
 }
 
-.navbar-inverse {
-    background-color: #314D68;
-    border-bottom-color: #314D68;
-    border-bottom-width: 2px;
-    border-bottom-style: solid;
-    
+
+.navbar-inverse .navbar-brand {
+    color: #ffffff;
 }
 
-
-.navbar-inverse .navbar-brand:hover {
-    color: #ffffff !important;
-}
 
 .navbar-inverse .navbar-nav > li > a {
+	color: #ffffff;
 	font-weight: bold;
 }
 
-.navbar-inverse .navbar-nav > li > a:hover {
-	color: #ffffff !important;
-}
 
 .last {
 
@@ -32,13 +21,27 @@ body {
 }
 
 
+.navbar {
+	border:none;
+	margin-bottom: 0;
+}
 
+.navbar-fixed-top {
+	z-index: 0;
+	top:0;
+	background-color: #00B3C9;
+	height: 80px;
+}
+.container-fluid.content  {
+	position: relative;
+	top:80px;
+}
 /********recommnedation detail********************/
 .user-info {
   display: inline-block;
   padding-right: 10px;
   font-weight: bold;
-  color: #999999;
+  color: #ffffff;
 }
 
 .votes-info {
@@ -60,9 +63,7 @@ body {
 /*****************filter*****/
 .search {
     margin: 0 auto;
-    background-color: #ECF0F1;
-    margin-bottom: 50px;
-    margin-top: 30px;
+    background-color: #92CED3;
     
     .input-search {
     	padding-left: 30px;
@@ -73,18 +74,21 @@ body {
 	background-color: #ffffff;
 	padding-left: 20px;
 	padding-right: 20px;
-  max-width: 800px;
-  margin: 0 auto;
+	max-width: 800px;
+	margin: 0 auto;
 }
 
 .input-container {
-	margin: 0 auto;
+	left: 12px;
 	width: 40%;
-	
+	height: 45px;
 }
 
 .input-container .form-control {
-	height:50px;
+    height: 35px;
+    top: 5px;
+    position: relative;
+    left: 12px;
 }
 
 

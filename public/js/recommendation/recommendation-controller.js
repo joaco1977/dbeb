@@ -24,13 +24,12 @@ angular
 								$scope.fetching = true;
 								
 								var recoTemp = Recommendation.query({
-									offset : $scope.offset
+									offset : $scope.offset,
+									searchText: $scope.searchText
 								});
 
 								recoTemp.$promise.then(function(data) {
 									$scope.fetching = false;
-									
-									console.log(data);
 									
 									if (data.length) {
 										$scope.offset += data.length;
@@ -153,57 +152,29 @@ angular
 											$scope.save(id);
 										});
 							};
-						} ])
-		.controller(
-				'RecommendationSaveController',
-				[
-						'$scope',
-						'$uibModalInstance',
-						'$http',
-						'recommendation',
-						'Tag',
-						function($scope, $uibModalInstance, $http,
-								recommendation, Tag) {
-							$scope.recommendation = recommendation;
+							
+							
+							$scope.openLocation = function(location) {
+								var locationDetail = $uibModal
+										.open({
+											templateUrl : 'views/location/location.html',
+											controller : 'LocationDetailController',
+											size : 'lg',
+											resolve : {
+												location : function() {
+													return location;
+												}
+											}
+										});
 
-							$scope.result = "";
-							// $scope.details = '';
-							$scope.options = {};
-							$scope.recommendation.company = {};
-							$scope.recommendation.company.location = {};
-							$scope.recommendation.company.location.details = {};
-							$scope.recommendation.company.location.formattedAddress = '';
-							$scope.recommendation.tags = [];
-
-							if (!$scope.recommendation.id) {
-								$scope.recommendation.votes = 0;
-							}
-
-							$scope.max = 5;
-							$scope.isReadonly = false;
-
-							$scope.hoveringOver = function(value) {
-								$scope.overStar = value;
-								$scope.percent = 100 * (value / $scope.max);
+								
 							};
-
-							$scope.recodateDateOptions = {
-								dateFormat : 'yyyy-mm-dd',
-								maxDate : -1
-
+							
+							$scope.searchRecoByText = function() {
+								$scope.recommendations = [];
+								$scope.offset = 0;
+								$scope.nextPage();
 							};
+							
 
-							$scope.loadTags = function(query) {
-
-								return $http.get('dbeb/tags?name=' + query);
-
-							};
-
-							$scope.ok = function() {
-								$uibModalInstance.close($scope.recommendation);
-							};
-
-							$scope.cancel = function() {
-								$uibModalInstance.dismiss('cancel');
-							};
 						} ]);

@@ -1,7 +1,5 @@
 <div>
 
-    <h2></h2>
-
     <script type = "text/ng-template" id="recommendation-save.html">
         <form name="form" role="form" novalidate
               class="ng-scope ng-invalid ng-invalid-required ng-dirty"
@@ -80,57 +78,64 @@
 	
 	
 	
-	<div class="button-container">
-		<div class="logo">
-            <img class="img-responsive" src="../images/logo.png"/>
-        </div>
+<!-- 	<div class="button-container"> -->
+<!-- 		<div class="logo"> -->
+<!--             <img class="img-responsive" src="../images/logo.png"/> -->
+<!--         </div> -->
 
-        <div class="button-create">
-            <a ng-show="isLoggedIn('facebook')" href="#" ng-click="create()" class="btn btn-warning">
-                Recomendá a alguien
-            </a>
-        </div>
-    </div>
+<!--         <div class="button-create"> -->
+<!--             <a ng-show="isLoggedIn('facebook')" href="#" ng-click="create()" class="btn btn-warning"> -->
+<!--                 Recomendá a alguien -->
+<!--             </a> -->
+<!--         </div> -->
+<!--     </div> -->
 	    <div class="form-group search">
 	    	<div class="input-container">
 			      <input type="text" ng-model="searchText" class="form-control" 
-			      placeholder="Ingresa lo que quieras buscar...">
+			      placeholder="Ingresa lo que quieras buscar..."
+                  ng-model-options="{ debounce: 500 }"
+                  ng-change="searchRecoByText();">
 			</div>      
 	  	</div>
 	  	
                  
 	  	<div class="results" ng-show="recommendations.length">
             <div tagged-infinite-scroll="nextPage()" ng-class="{fetching: fetching}">
-                <div ng-repeat="recommendation in recommendations | filter: searchText" class="row">
-    		  		<div class="col-md-8">{{recommendation.company.name }}</div>
-                    <div class="col-md-8">
+                <div ng-repeat="recommendation in recommendations" class="row">
+    		  		<div class="col-md-9">{{recommendation.company.name }}</div>
+                    <div class="col-md-9">
                         <a target="_blank" ng-href="{{recommendation.createUser.facebookUrl}}">{{recommendation.createUser.fullName}}
                             <img class="profile-image" ng-src="{{recommendation.createUser.pictureUrl}}"/>
                         </a>
                     </div>
-                    <div class="col-md-8">{{recommendation.company.location.formattedAddress }}</div>
-                    <div class="col-md-8">{{recommendation.detail }}</div>
-    		  		<div class="col-md-8">{{recommendation.recodate  | date:'yyyy-MM-dd'}}</div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">{{recommendation.company.location.formattedAddress }}</div>
+                    <div class="col-md-9">{{recommendation.detail }}</div>
+    		  		<div class="col-md-9">{{recommendation.recodate  | date:'yyyy-MM-dd'}}</div>
+                    <div class="col-md-9">
                        
                        <uib-rating ng-model="recommendation.votes" max="max" readonly="true" state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'" aria-labelledby="custom-icons-1">
                         </uib-ating>
 
                        
                     </div>    
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                        
 
                        <tags-input ng-disabled="true" class="bootstrap invalid-tag" ng-model="recommendation.tags" readonly="true">
                         </tags-input>
                     </div>
-    		  		<div class="col-md-8">
+    		  		<div class="col-md-9">
     		  			<!-- <button type="submit"
     	                            ng-click="update(recommendation.id)"
     	                            class="btn">
     	                        <span class="glyphicon glyphicon-pencil"></span> Detalle
     	                    </button> -->
     		  		</div>
+    		  		<div class="col-md-9">
+                       
+                       <!--<a href="#" ng-click="openLocation(recommendation.company.location)">Show Map</a>-->
+                       
+                    </div>
                     <div style="clear: both;"></div>
                     <span ng-show="isLoading" class="ng-hide">Loading...</span>
     		    </div>
