@@ -27,7 +27,6 @@ body {
 }
 
 .navbar-fixed-top {
-	z-index: 0;
 	top:0;
 	background-color: #00B3C9;
 	height: 80px;
@@ -64,24 +63,18 @@ body {
 .search {
     margin: 0 auto;
     background-color: #92CED3;
-    
+    width: 100%;
+    float: left;
     .input-search {
     	padding-left: 30px;
     }
 }
 
-.results {
-	background-color: #ffffff;
-	padding-left: 20px;
-	padding-right: 20px;
-	max-width: 800px;
-	margin: 0 auto;
-}
 
 .input-container {
-	left: 12px;
-	width: 40%;
+	width: 50%;
 	height: 45px;
+	float: left;
 }
 
 .input-container .form-control {
@@ -89,9 +82,19 @@ body {
     top: 5px;
     position: relative;
     left: 12px;
+    max-width: 500px;
 }
 
+.recommend-button {
+    width: 50%;
+	height: 45px;
+	float: left;
+}
 
+.recommend-button a{
+	position: relative;
+	top: 5px;	
+}
 .no-data {
 	margin: 0 auto;
 	width: 50%;
@@ -187,7 +190,7 @@ body {
 /********profile image**********/
 
 .profile-image {
-  border-radius: 12px;
+  border-radius: 25px;
   margin-left: 5px;
 }
 
@@ -199,4 +202,40 @@ body {
     background-color: lightgrey;
     opacity: 0.6;
     pointer-events: none;
+}
+
+
+/********************results***********************************/
+
+.results {
+	background-color: #ffffff;
+	padding-left: 20px;
+	padding-right: 20px;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.results .row {
+	background-color: #EAE3D8;
+	border-radius:5px;
+	margin-top: 20px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-left: 10px;
+}
+
+.results .row .company {
+	 text-transform: uppercase;
+}
+
+.results .row .address {
+	 padding-bottom: 15px;
+}
+
+.results .row .detail {
+	 padding-bottom: 15px;
+}
+
+.results .row .profile {
+	 font-size: 12px;
 }

@@ -95,43 +95,55 @@
 			      placeholder="Ingresa lo que quieras buscar..."
                   ng-model-options="{ debounce: 500 }"
                   ng-change="searchRecoByText();">
-			</div>      
+			</div> 
+			<div class="recommend-button">
+				<a ng-show="isLoggedIn('facebook')" href="#" ng-click="create()" class="btn btn-warning">
+	                Recomendá a alguien
+	            </a> 
+            </div>    
 	  	</div>
 	  	
                  
-	  	<div class="results" ng-show="recommendations.length">
+	  	<div class="container results" ng-show="recommendations.length">
             <div tagged-infinite-scroll="nextPage()" ng-class="{fetching: fetching}">
                 <div ng-repeat="recommendation in recommendations" class="row">
-    		  		<div class="col-md-9">{{recommendation.company.name }}</div>
-                    <div class="col-md-9">
-                        <a target="_blank" ng-href="{{recommendation.createUser.facebookUrl}}">{{recommendation.createUser.fullName}}
-                            <img class="profile-image" ng-src="{{recommendation.createUser.pictureUrl}}"/>
-                        </a>
-                    </div>
-                    <div class="col-md-9">{{recommendation.company.location.formattedAddress }}</div>
-                    <div class="col-md-9">{{recommendation.detail }}</div>
-    		  		<div class="col-md-9">{{recommendation.recodate  | date:'yyyy-MM-dd'}}</div>
-                    <div class="col-md-9">
+    		  		<div class="col-md-8 company">{{recommendation.company.name }}</div>
+                    <div class="col-md-4">
                        
                        <uib-rating ng-model="recommendation.votes" max="max" readonly="true" state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'" aria-labelledby="custom-icons-1">
                         </uib-ating>
 
                        
-                    </div>    
-                    <div class="col-md-9">
+                    </div> 
+                    <div class="col-md-8 address">{{recommendation.company.location.formattedAddress }}</div>
+                    <div class="col-md-8 detail">{{recommendation.detail }}</div>
+                    
+                       
+                    <div class="col-md-8">
                        
 
-                       <tags-input ng-disabled="true" class="bootstrap invalid-tag" ng-model="recommendation.tags" readonly="true">
+                       <tags-input ng-disabled="true" 
+                       class="bootstrap invalid-tag" ng-model="recommendation.tags" readonly="true"
+                       placeholder="">
                         </tags-input>
                     </div>
-    		  		<div class="col-md-9">
+    		  		<div class="col-md-8">
     		  			<!-- <button type="submit"
     	                            ng-click="update(recommendation.id)"
     	                            class="btn">
     	                        <span class="glyphicon glyphicon-pencil"></span> Detalle
     	                    </button> -->
     		  		</div>
-    		  		<div class="col-md-9">
+    		  		<div class="col-md-4 profile">
+                        <a target="_blank" ng-href="{{recommendation.createUser.facebookUrl}}">
+                            <img class="profile-image" ng-src="{{recommendation.createUser.pictureUrl}}"/>
+                        </a>
+                        <div>Recomendado por: {{recommendation.createUser.fullName}}</div>
+                        <div>{{recommendation.recodate  | date:'longDate'}}</div>
+                    </div>
+                    
+                    
+    		  		<div class="col-md-8">
                        
                        <!--<a href="#" ng-click="openLocation(recommendation.company.location)">Show Map</a>-->
                        
