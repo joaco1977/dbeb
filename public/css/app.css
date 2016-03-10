@@ -64,15 +64,18 @@ body {
     margin: 0 auto;
     background-color: #92CED3;
     width: 100%;
-    float: left;
-    .input-search {
-    	padding-left: 30px;
-    }
+    height: 45px;
+    top: 80px;
+    position: fixed;
+    z-index: 2;
 }
 
+.search .input-search {
+    	padding-left: 30px;
+} 
 
 .input-container {
-	width: 50%;
+	width: 40%;
 	height: 45px;
 	float: left;
 }
@@ -213,11 +216,12 @@ body {
 	padding-right: 20px;
 	max-width: 800px;
 	margin: 0 auto;
+	position: relative;
+	margin-top: 50px;
 }
 
 .results .row {
 	background-color: #EAE3D8;
-	border-radius:5px;
 	margin-top: 20px;
 	padding-top: 15px;
 	padding-bottom: 15px;
@@ -238,4 +242,31 @@ body {
 
 .results .row .profile {
 	 font-size: 12px;
+	 
+}
+
+.results .row .profile .image{
+	 float: right;
+}
+
+/* .results .row .profile .image img:hover{ */
+/* 	 border: 1px solid; */
+/* 	 border-color: #92CED3; */
+/* } */
+
+.results .row .profile .fullname{
+	 float: right;
+	 padding-top: 5px;
+}
+
+.results .row .profile .date{
+	 float: right;
+}
+.results .row .votes span {
+	 float: right;
+}
+
+.btn.btn-recommendation {
+	background-color: #4863ae;
+	
 }

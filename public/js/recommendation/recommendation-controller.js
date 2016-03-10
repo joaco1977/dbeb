@@ -29,7 +29,7 @@ angular
 								});
 
 								recoTemp.$promise.then(function(data) {
-									$scope.fetching = false;
+									
 									
 									if (data.length) {
 										$scope.offset += data.length;
@@ -41,8 +41,7 @@ angular
 									} else {
 										$scope.disabled = true;
 									}
-									
-									
+									$scope.fetching = false;
 									
 								});
 							};

@@ -97,7 +97,7 @@
                   ng-change="searchRecoByText();">
 			</div> 
 			<div class="recommend-button">
-				<a ng-show="isLoggedIn('facebook')" href="#" ng-click="create()" class="btn btn-warning">
+				<a ng-show="isLoggedIn('facebook')" href="#" ng-click="create()" class="btn btn-recommendation">
 	                Recomendá a alguien
 	            </a> 
             </div>    
@@ -105,10 +105,10 @@
 	  	
                  
 	  	<div class="container results" ng-show="recommendations.length">
-            <div tagged-infinite-scroll="nextPage()" ng-class="{fetching: fetching}">
+            <div tagged-infinite-scroll="nextPage()">
                 <div ng-repeat="recommendation in recommendations" class="row">
     		  		<div class="col-md-8 company">{{recommendation.company.name }}</div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 votes">
                        
                        <uib-rating ng-model="recommendation.votes" max="max" readonly="true" state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'" aria-labelledby="custom-icons-1">
                         </uib-ating>
@@ -117,7 +117,13 @@
                     </div> 
                     <div class="col-md-8 address">{{recommendation.company.location.formattedAddress }}</div>
                     <div class="col-md-8 detail">{{recommendation.detail }}</div>
-                    
+                    <div class="col-md-4 profile">
+                        <a class="image" target="_blank" ng-href="{{recommendation.createUser.facebookUrl}}">
+                            <img class="profile-image" ng-src="{{recommendation.createUser.pictureUrl}}"/>
+                        </a>
+                        <div class="fullname">Recomendado por: {{recommendation.createUser.fullName}}</div>
+                        <div class="date">{{recommendation.recodate  | date:'longDate'}}</div>
+                    </div>
                        
                     <div class="col-md-8">
                        
@@ -134,13 +140,7 @@
     	                        <span class="glyphicon glyphicon-pencil"></span> Detalle
     	                    </button> -->
     		  		</div>
-    		  		<div class="col-md-4 profile">
-                        <a target="_blank" ng-href="{{recommendation.createUser.facebookUrl}}">
-                            <img class="profile-image" ng-src="{{recommendation.createUser.pictureUrl}}"/>
-                        </a>
-                        <div>Recomendado por: {{recommendation.createUser.fullName}}</div>
-                        <div>{{recommendation.recodate  | date:'longDate'}}</div>
-                    </div>
+    		  		
                     
                     
     		  		<div class="col-md-8">
@@ -149,14 +149,14 @@
                        
                     </div>
                     <div style="clear: both;"></div>
-                    <span ng-show="isLoading" class="ng-hide">Loading...</span>
+                    
     		    </div>
             </div>    
         </div>
-    	 
+    	<span us-spinner="{radius:30, width:8, length: 16}" spinner-on="fetching"></span> 
         <!-- </div> -->
-        <div class="no-data" ng-hide="recommendations.length">
-                <div class="message-init">
-                    <span>Animate! Es fácil encontrar lo que necesitas</span>
-                </div>
-        </div>
+<!--         <div class="no-data" ng-hide="recommendations.length"> -->
+<!--                 <div class="message-init"> -->
+<!--                     <span>Animate! Es fácil encontrar lo que necesitas</span> -->
+<!--                 </div> -->
+<!--         </div> -->
